@@ -1,0 +1,100 @@
+@page
+@model ImmiAccount.Pages.Payments.IndexModel
+@{
+    ViewData["Title"] = "Manage Payments";
+    ViewData["PortalTitle"] = "Online Payments";
+    ViewData["PaymentsPage"] = true;
+}
+
+<div class="section-header">
+    <h2>Manage Payments</h2>
+    <span class="help-icon" title="Help">?</span>
+</div>
+
+<div class="content-area">
+
+    <div class="payments-btn-row">
+        <a href="#" class="btn" style="font-size: 13px;">&#128424; Pre-pay Paper Service</a>
+        <a href="#" class="btn" style="font-size: 13px;">&#128424; Pay an Invoice</a>
+    </div>
+
+    <div class="transaction-header-row">
+        <div class="transaction-title">
+            Transaction History
+            <select class="period-select">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>Last 90 Days</option>
+                <option>All</option>
+            </select>
+        </div>
+        <a href="#" style="font-size: 13px; color: #1a5276;">Advanced Search</a>
+    </div>
+
+    <div class="filter-row">
+        <label for="filter-input">Filter/Search:</label>
+        <input type="text" id="filter-input" class="filter-input" />
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Reference No. <span class="sort-arrows">&#8597;</span></th>
+                <th>Name <span class="sort-arrows">&#8597;</span></th>
+                <th>Transaction Date <span class="sort-arrows">&#8595;</span></th>
+                <th>Issuing Office <span class="sort-arrows">&#8597;</span></th>
+                <th>Internal Ref. <span class="sort-arrows">&#8597;</span></th>
+                <th>Currency <span class="sort-arrows">&#8597;</span></th>
+                <th>Amount</th>
+                <th>Status <span class="sort-arrows">&#8597;</span></th>
+                <th>Select Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Payments.Any())
+            {
+                @foreach (var payment in Model.Payments)
+                {
+                    <tr>
+                        <td>@(payment.Type ?? "")</td>
+                        <td>@(payment.Application?.ReferenceNumber ?? "")</td>
+                        <td>@Model.DisplayName</td>
+                        <td>@(payment.PaidAt != null ? DateHelper.Format(payment.PaidAt.Length > 10 ? payment.PaidAt[..10] : payment.PaidAt) : "")</td>
+                        <td>@(payment.IssuingOffice ?? "")</td>
+                        <td>@(payment.GatewayRef ?? "")</td>
+                        <td>@(payment.Currency ?? "AUD")</td>
+                        <td>@(payment.AmountAud > 0 ? $"${payment.AmountAud:F2}" : "")</td>
+                        <td>@payment.Status</td>
+                        <td>
+                            <select style="font-size: 12px; padding: 2px 4px; border: 1px solid #adadad;">
+                                <option>Select...</option>
+                                <option>View receipt</option>
+                                <option>Print</option>
+                            </select>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="no-data-row">
+                    <td colspan="10">No data available in table</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+        <span>
+            Showing @Model.Payments.Count to @Model.Payments.Count of @Model.Payments.Count entries
+        </span>
+        <div class="table-pagination">
+            <a href="#">&#171;</a>
+            <a href="#">&#8249;</a>
+            <a href="#">&#8250;</a>
+            <a href="#">&#187;</a>
+        </div>
+    </div>
+
+</div>

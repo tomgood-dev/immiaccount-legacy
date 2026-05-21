@@ -1,12 +1,12 @@
-version: '3.8'
 services:
   immiaccount:
     build: .
     ports:
-      - "8080:5000"
+      - "8080:8080"
     volumes:
       - immiaccount_data:/data
     environment:
-      - FLASK_ENV=production
+      - DATABASE=/data/immiaccount.db
+
 volumes:
   immiaccount_data:

@@ -393,43 +393,6 @@ a:hover {
     padding: 10px 12px 10px 36px;
 }
 
-.app-details-grid {
-    display: table;
-    width: 100%;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-
-.app-details-row {
-    display: table-row;
-}
-
-.app-detail-label {
-    display: table-cell;
-    font-weight: bold;
-    color: #555;
-    padding: 2px 12px 2px 0;
-    width: 180px;
-    white-space: nowrap;
-    vertical-align: top;
-}
-
-.app-detail-value {
-    display: table-cell;
-    color: #333;
-    padding: 2px 0;
-    vertical-align: top;
-}
-
-.app-detail-value a {
-    color: #1a5276;
-    font-size: 12px;
-}
-
-.app-detail-value.double-col {
-    padding-right: 16px;
-}
-
 .app-details-two-col {
     display: flex;
     gap: 0;
@@ -496,16 +459,6 @@ a:hover {
 .btn-primary:hover {
     background: linear-gradient(to bottom, #4a8cc4, #2a6ab8);
     color: #fff;
-}
-
-.btn-orange {
-    background: linear-gradient(to bottom, #f0a060, #e07720);
-    border: 1px solid #c06010;
-    color: #fff;
-}
-
-.btn-icon {
-    font-size: 14px;
 }
 
 /* --- New Application Page --- */

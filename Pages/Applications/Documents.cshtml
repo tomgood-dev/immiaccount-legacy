@@ -1,0 +1,83 @@
+@page "/Applications/{appId}/Documents"
+@model ImmiAccount.Pages.Applications.DocumentsModel
+@{
+    Layout = "_AppLayout";
+}
+
+<div class="subheading">Attached Documents</div>
+
+@if (Model.UploadSuccess)
+{
+    <div class="success-msg">
+        The document has been attached to your application.
+    </div>
+}
+
+<div class="documents-section">
+    @if (Model.Documents.Any())
+    {
+        <table class="documents-table">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Document Type</th>
+                    <th>Date Uploaded</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var doc in Model.Documents)
+                {
+                    <tr>
+                        <td>@doc.Filename</td>
+                        <td>@doc.DocumentType</td>
+                        <td>@DateHelper.Format(doc.UploadedAt.Length > 10 ? doc.UploadedAt[..10] : doc.UploadedAt)</td>
+                        <td>
+                            @if (doc.SizeBytes < 1024)
+                            {
+                                @($"{doc.SizeBytes} B")
+                            }
+                            else if (doc.SizeBytes < 1048576)
+                            {
+                                @($"{doc.SizeBytes / 1024.0:F1} KB")
+                            }
+                            else
+                            {
+                                @($"{doc.SizeBytes / 1048576.0:F1} MB")
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="font-size: 13px; color: #777; margin-bottom: 16px;">No documents have been attached to this application.</p>
+    }
+</div>
+
+<hr class="divider">
+
+<div class="upload-form">
+    <h4>Attach a document</h4>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <label for="documentType">Select document type</label>
+            <select name="documentType" id="documentType" class="form-select">
+                @foreach (var dt in Model.DocumentTypes)
+                {
+                    <option value="@dt">@dt</option>
+                }
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="documentFile">Choose file</label>
+            <input type="file" name="documentFile" id="documentFile" class="form-file-input">
+        </div>
+        <div class="form-row">
+            <label></label>
+            <button type="submit" class="btn btn-primary">Attach</button>
+        </div>
+    </form>
+</div>

@@ -1,10 +1,9 @@
-{% extends "base.html" %}
+@page
+@model ImmiAccount.Pages.ManageAccountModel
+@{
+    ViewData["Title"] = "Manage Account";
+}
 
-{% block title %}Manage Account{% endblock %}
-
-{% block content %}
-
-<!-- Section header -->
 <div class="section-header">
     <h2>Manage Account</h2>
     <span class="help-icon" title="Help">?</span>
@@ -12,58 +11,57 @@
 
 <div class="content-area">
 
-    {% if save_success %}
-    <div class="success-msg" style="margin-bottom: 14px;">
-        Your account details have been updated.
-    </div>
-    {% endif %}
+    @if (Model.SaveSuccess)
+    {
+        <div class="success-msg" style="margin-bottom: 14px;">
+            Your account details have been updated.
+        </div>
+    }
 
-    {% if save_error %}
-    <div class="login-error" style="margin-bottom: 14px;">
-        {{ save_error }}
-    </div>
-    {% endif %}
+    @if (Model.SaveError != null)
+    {
+        <div class="login-error" style="margin-bottom: 14px;">
+            @Model.SaveError
+        </div>
+    }
 
     <div class="subheading" style="margin-bottom: 14px;">Account Details</div>
 
-    <form method="POST" action="{{ url_for('manage_account') }}" class="manage-form">
+    <form method="post" class="manage-form">
         <div class="form-group">
-            <label for="display_name">Display name</label>
-            <input type="text" id="display_name" name="display_name"
-                   value="{{ user.display_name or '' }}">
+            <label for="displayName">Display name</label>
+            <input type="text" id="displayName" name="displayName" value="@Model.CurrentUser?.DisplayName">
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" id="email" name="email"
-                   value="{{ user.email or '' }}">
+            <input type="email" id="email" name="email" value="@Model.CurrentUser?.Email">
         </div>
         <div class="form-group">
             <label for="phone">Phone number</label>
-            <input type="tel" id="phone" name="phone"
-                   value="{{ user.phone or '' }}">
+            <input type="tel" id="phone" name="phone" value="@Model.CurrentUser?.Phone">
         </div>
 
         <div style="margin-top: 6px; margin-bottom: 12px;">
             <table style="font-size: 12px; color: #777;">
                 <tr>
                     <td style="padding-right: 12px; font-weight: bold; color: #555;">Username</td>
-                    <td>{{ user.username }}</td>
+                    <td>@Model.CurrentUser?.Username</td>
                 </tr>
                 <tr>
                     <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Family name</td>
-                    <td>{{ user.family_name }}</td>
+                    <td>@Model.CurrentUser?.FamilyName</td>
                 </tr>
                 <tr>
                     <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Given names</td>
-                    <td>{{ user.given_names }}</td>
+                    <td>@Model.CurrentUser?.GivenNames</td>
                 </tr>
                 <tr>
                     <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Date of birth</td>
-                    <td>{{ user.date_of_birth | format_date }}</td>
+                    <td>@DateHelper.Format(Model.CurrentUser?.DateOfBirth)</td>
                 </tr>
                 <tr>
                     <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Agent email</td>
-                    <td>{{ user.agent_email or 'Not set' }}</td>
+                    <td>@(Model.CurrentUser?.AgentEmail ?? "Not set")</td>
                 </tr>
             </table>
         </div>
@@ -71,10 +69,8 @@
         <div class="btn-row">
             <button type="submit" class="btn" style="font-size: 13px; padding: 5px 16px;">Save</button>
             &nbsp;
-            <a href="{{ url_for('applications') }}" class="btn" style="font-size: 13px; padding: 5px 16px;">Cancel</a>
+            <a href="/Applications" class="btn" style="font-size: 13px; padding: 5px 16px;">Cancel</a>
         </div>
     </form>
 
 </div>
-
-{% endblock %}

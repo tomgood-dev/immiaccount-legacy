@@ -1,8 +1,7 @@
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+bin/
+obj/
+*.user
+*.suo
+.vs/
 *.db
-*.sqlite3
-.env
 data/

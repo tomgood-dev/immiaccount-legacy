@@ -1,6 +1,6 @@
 # ImmiAccount Legacy Mock App
 
-A mock of Australia's ImmiAccount immigration portal, built as a Flask/Python app. Used as the starting point for an Innovation Day workshop — it simulates the current portal so the team can redesign and rebuild it.
+A mock of Australia's ImmiAccount immigration portal, built as an ASP.NET Core 8 (Razor Pages) app. Used as the starting point for an Innovation Day workshop — it simulates the current portal so the team can redesign and rebuild it.
 
 ---
 
@@ -25,7 +25,7 @@ cd immiaccount-legacy
 docker compose up --build
 ```
 
-This will build the image, seed the database, and start the Flask server.
+This will build the .NET image, seed the database, and start the app.
 
 ### 3. Open in your browser
 
@@ -70,13 +70,25 @@ docker compose up
 
 ```
 immiaccount-legacy/
-├── app/
-│   ├── app.py          # Flask application
-│   ├── database.py     # SQLite setup
-│   ├── seed.py         # Test data
-│   ├── static/         # CSS
-│   └── templates/      # HTML templates
+├── Data/               # EF Core DbContext and seed data
+├── Helpers/            # Date formatting utilities
+├── Models/             # Entity models (User, VisaApplication, etc.)
+├── Pages/              # Razor Pages (routes + page models)
+│   ├── Applications/   # Application list, detail, messages, documents
+│   ├── Payments/       # Payments page
+│   ├── Shared/         # Shared layouts (_Layout, _AppLayout)
+│   ├── Login.cshtml
+│   └── ManageAccount.cshtml
+├── wwwroot/css/        # Stylesheet
+├── Program.cs          # App startup and DI configuration
+├── ImmiAccount.csproj
 ├── Dockerfile
-├── docker-compose.yml
-└── requirements.txt
+└── docker-compose.yml
 ```
+
+## Tech Stack
+
+- **Runtime:** .NET 8 / ASP.NET Core
+- **UI:** Razor Pages
+- **Database:** SQLite via Entity Framework Core 8
+- **Container:** Docker (multi-stage build, `mcr.microsoft.com/dotnet/aspnet:8.0`)

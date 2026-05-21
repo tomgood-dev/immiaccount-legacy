@@ -1,45 +1,47 @@
-{% extends "app_base.html" %}
-
-{% block app_content %}
+@page "/Applications/{appId}"
+@model ImmiAccount.Pages.Applications.DetailModel
+@{
+    Layout = "_AppLayout";
+}
 
 <div class="app-info-section">
     <h3>Application Details</h3>
-
     <div class="app-info-grid">
         <div class="app-info-row">
             <span class="app-info-label">Reference Number</span>
-            <span class="app-info-value">{{ application.reference_number }}</span>
+            <span class="app-info-value">@Model.Application!.ReferenceNumber</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Visa Subclass</span>
-            <span class="app-info-value">{{ application.subclass_name }}</span>
+            <span class="app-info-value">@Model.Application.Subclass!.Name</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Stream</span>
-            <span class="app-info-value">{{ application.stream }}</span>
+            <span class="app-info-value">@Model.Application.Subclass.Stream</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Pathway Type</span>
-            <span class="app-info-value">{{ application.pathway_type }}</span>
+            <span class="app-info-value">@Model.Application.Subclass.PathwayType</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Current Status</span>
-            <span class="app-info-value"><strong>{{ application.current_status }}</strong></span>
+            <span class="app-info-value"><strong>@Model.Application.CurrentStatus</strong></span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Date Lodged</span>
-            <span class="app-info-value">{{ application.date_lodged | format_date }}</span>
+            <span class="app-info-value">@DateHelper.Format(Model.Application.DateLodged)</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Last Updated</span>
-            <span class="app-info-value">{{ application.last_updated | format_date }}</span>
+            <span class="app-info-value">@DateHelper.Format(Model.Application.LastUpdated)</span>
         </div>
-        {% if application.sponsor_name %}
-        <div class="app-info-row">
-            <span class="app-info-label">Sponsor</span>
-            <span class="app-info-value">{{ application.sponsor_name }}</span>
-        </div>
-        {% endif %}
+        @if (Model.Application.SponsorName != null)
+        {
+            <div class="app-info-row">
+                <span class="app-info-label">Sponsor</span>
+                <span class="app-info-value">@Model.Application.SponsorName</span>
+            </div>
+        }
     </div>
 </div>
 
@@ -48,11 +50,11 @@
     <div class="app-info-grid">
         <div class="app-info-row">
             <span class="app-info-label">Name</span>
-            <span class="app-info-value">{{ application.given_names }} {{ application.family_name }}</span>
+            <span class="app-info-value">@Model.Application.Applicant!.GivenNames @Model.Application.Applicant.FamilyName</span>
         </div>
         <div class="app-info-row">
             <span class="app-info-label">Date of Birth</span>
-            <span class="app-info-value">{{ application.date_of_birth | format_date }}</span>
+            <span class="app-info-value">@DateHelper.Format(Model.Application.Applicant.DateOfBirth)</span>
         </div>
     </div>
 </div>
@@ -66,5 +68,3 @@
     You will be notified by email when a decision is made on your application.
     Contact your migration agent if you have questions about the progress of your application.
 </div>
-
-{% endblock %}

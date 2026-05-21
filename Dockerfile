@@ -1,14 +1,15 @@
-FROM python:3.11-slim
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["ImmiAccount.csproj", "."]
+RUN dotnet restore
+COPY . .
+RUN dotnet publish -c Release -o /app/publish
 
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY app/ /app/
-
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+COPY --from=build /app/publish .
 RUN mkdir -p /data
-
-EXPOSE 5000
-
-CMD python seed.py && python app.py
+ENTRYPOINT ["dotnet", "ImmiAccount.dll"]

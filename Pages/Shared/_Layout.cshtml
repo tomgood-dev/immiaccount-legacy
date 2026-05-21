@@ -1,38 +1,32 @@
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ImmiAccount{% endblock %} - Department of Home Affairs</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>@(ViewData["Title"] ?? "ImmiAccount") - Department of Home Affairs</title>
+    <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body>
 
-<!-- ====== HEADER ====== -->
 <header class="site-header">
     <div class="header-inner">
         <div class="header-left">
             <div class="gov-branding">
                 <div class="gov-crest">
-                    <!-- Australian Government crest — simplified inline SVG shield -->
                     <svg width="44" height="52" viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Australian Government Crest">
-                        <!-- Shield shape -->
                         <path d="M2 2 H42 V30 Q42 50 22 50 Q2 50 2 30 Z" fill="none" stroke="white" stroke-width="2"/>
-                        <!-- Central dividing cross -->
                         <line x1="22" y1="2" x2="22" y2="50" stroke="white" stroke-width="1"/>
                         <line x1="2" y1="22" x2="42" y2="22" stroke="white" stroke-width="1"/>
-                        <!-- Star cluster top-left -->
                         <circle cx="10" cy="12" r="1.5" fill="white"/>
                         <circle cx="14" cy="8" r="1.5" fill="white"/>
                         <circle cx="18" cy="12" r="1.5" fill="white"/>
                         <circle cx="14" cy="16" r="1.5" fill="white"/>
                         <circle cx="14" cy="12" r="1" fill="white"/>
-                        <!-- Star cluster top-right -->
                         <circle cx="28" cy="10" r="1.5" fill="white"/>
                         <circle cx="32" cy="14" r="1.5" fill="white"/>
                         <circle cx="36" cy="10" r="1.5" fill="white"/>
-                        <!-- Bottom kangaroo/emu placeholder — simple stars -->
                         <circle cx="12" cy="35" r="1.5" fill="white"/>
                         <circle cx="22" cy="32" r="2" fill="white"/>
                         <circle cx="32" cy="35" r="1.5" fill="white"/>
@@ -47,43 +41,60 @@
             </div>
         </div>
         <div class="header-right">
-            {% if session.get('user_id') %}
-            <div class="header-user-row">
-                <span>{{ session.get('display_name', '') }}</span>
-                &nbsp;&nbsp;
-                <a href="{{ url_for('manage_account') }}">Manage Account</a>
-                &nbsp;|&nbsp;
-                <a href="{{ url_for('logout') }}">Logout</a>
-            </div>
-            {% else %}
-            <div class="header-user-row">&nbsp;</div>
-            {% endif %}
+            @{
+                var displayName = Context.Session.GetString("DisplayName");
+            }
+            @if (displayName != null)
+            {
+                <div class="header-user-row">
+                    <span>@displayName</span>
+                    &nbsp;&nbsp;
+                    <a href="/ManageAccount">Manage Account</a>
+                    &nbsp;|&nbsp;
+                    <a href="/Logout">Logout</a>
+                </div>
+            }
+            else
+            {
+                <div class="header-user-row">&nbsp;</div>
+            }
             <div>
-                <span class="gov-title">{% block portal_title %}ImmiAccount{% endblock %}</span>
+                <span class="gov-title">@(ViewData["PortalTitle"] ?? "ImmiAccount")</span>
             </div>
         </div>
     </div>
 </header>
 
-<!-- ====== NAVIGATION ====== -->
-{% block nav %}
-<nav class="site-nav">
-    <div class="nav-inner">
-        <a href="{{ url_for('applications') }}" class="nav-tab {% if request.endpoint in ['applications', 'new_application', 'app_home', 'app_messages', 'app_documents'] %}active{% endif %}">My applications</a>
-        <a href="{{ url_for('payments') }}" class="nav-tab {% if request.endpoint == 'payments' %}active{% endif %}">My payments &#9660;</a>
-        <a href="#" class="nav-tab">Manage groups</a>
-        <a href="#" class="nav-tab">Related links &#9660;</a>
-        <a href="#" class="nav-tab">Help and support &#9660;</a>
-    </div>
-</nav>
-{% endblock %}
+@{
+    var path = Context.Request.Path.Value ?? "";
+    var isPaymentsPage = ViewData["PaymentsPage"] != null;
+}
 
-<!-- ====== MAIN ====== -->
+@if (isPaymentsPage)
+{
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="/Applications" class="nav-tab active">My applications</a>
+        </div>
+    </nav>
+}
+else
+{
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="/Applications" class="nav-tab @(path.StartsWith("/Applications") ? "active" : "")">My applications</a>
+            <a href="/Payments" class="nav-tab @(path.StartsWith("/Payments") ? "active" : "")">My payments &#9660;</a>
+            <a href="#" class="nav-tab">Manage groups</a>
+            <a href="#" class="nav-tab">Related links &#9660;</a>
+            <a href="#" class="nav-tab">Help and support &#9660;</a>
+        </div>
+    </nav>
+}
+
 <main class="main-content">
-    {% block content %}{% endblock %}
+    @RenderBody()
 </main>
 
-<!-- ====== FOOTER ====== -->
 <footer class="site-footer">
     <a href="#">Accessibility</a>
     <a href="#">Online Security</a>

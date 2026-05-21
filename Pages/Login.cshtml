@@ -1,3 +1,8 @@
+@page
+@model ImmiAccount.Pages.LoginModel
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +10,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in - ImmiAccount - Department of Home Affairs</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body class="login-page">
 
-<!-- ====== HEADER (minimal, no nav) ====== -->
 <header class="site-header">
     <div class="header-inner">
         <div class="header-left">
@@ -42,14 +46,11 @@
         </div>
         <div class="header-right">
             <div class="header-user-row">&nbsp;</div>
-            <div>
-                <span class="gov-title">ImmiAccount</span>
-            </div>
+            <div><span class="gov-title">ImmiAccount</span></div>
         </div>
     </div>
 </header>
 
-<!-- ====== LOGIN FORM ====== -->
 <div class="login-wrapper">
     <div class="login-box">
         <div class="section-header">
@@ -57,16 +58,15 @@
             <span class="help-icon" title="Help">?</span>
         </div>
         <div class="login-form-inner">
-
-            {% if timeout_msg %}
-            <div class="login-timeout">{{ timeout_msg }}</div>
-            {% endif %}
-
-            {% if error %}
-            <div class="login-error">{{ error }}</div>
-            {% endif %}
-
-            <form method="POST" action="{{ url_for('login') }}">
+            @if (Model.TimeoutMessage != null)
+            {
+                <div class="login-timeout">@Model.TimeoutMessage</div>
+            }
+            @if (Model.ErrorMessage != null)
+            {
+                <div class="login-error">@Model.ErrorMessage</div>
+            }
+            <form method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" autocomplete="username" autofocus>
@@ -79,7 +79,6 @@
                     <button type="submit" class="btn btn-primary" style="padding: 5px 20px; font-size: 13px;">Sign in</button>
                 </div>
             </form>
-
             <div class="login-help-text">
                 Having trouble signing in? <a href="#">Contact the Department</a>.
             </div>
@@ -87,7 +86,6 @@
     </div>
 </div>
 
-<!-- ====== FOOTER ====== -->
 <footer class="site-footer">
     <a href="#">Accessibility</a>
     <a href="#">Online Security</a>

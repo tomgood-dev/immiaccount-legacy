@@ -1,6 +1,8 @@
-{% extends "app_base.html" %}
-
-{% block app_content %}
+@page "/Applications/{appId}/Messages"
+@model ImmiAccount.Pages.Applications.MessagesModel
+@{
+    Layout = "_AppLayout";
+}
 
 <div class="messages-heading">
     Messages
@@ -10,7 +12,7 @@
 <div class="messages-info-box">
     Correspondence for this application is currently being sent to a Registered Migration Agent /
     Legal Practitioner at the following email address:
-    <strong>{{ user.agent_email }}</strong>
+    <strong>@Model.AgentEmail</strong>
     <br><br>
     Please check your spam filter if you have not received any correspondence.
     <br><br>
@@ -30,29 +32,31 @@
         </tr>
     </thead>
     <tbody>
-        {% if correspondence %}
-            {% for corr in correspondence %}
-            <tr>
-                <td><a href="#" class="corr-title-link">{{ corr.title }}</a></td>
-                <td>{{ corr.date_sent | format_date }}</td>
-                <td>{{ corr.recipient_email }}</td>
-            </tr>
-            {% endfor %}
-        {% else %}
+        @if (Model.Correspondence.Any())
+        {
+            @foreach (var corr in Model.Correspondence)
+            {
+                <tr>
+                    <td><a href="#" class="corr-title-link">@corr.Title</a></td>
+                    <td>@DateHelper.Format(corr.DateSent)</td>
+                    <td>@corr.RecipientEmail</td>
+                </tr>
+            }
+        }
+        else
+        {
             <tr>
                 <td colspan="3" style="text-align: center; color: #999; padding: 20px;">
                     No correspondence available.
                 </td>
             </tr>
-        {% endif %}
+        }
     </tbody>
 </table>
 
 <div style="margin-top: 8px; display: flex; align-items: center; justify-content: flex-end; font-size: 12px; gap: 4px; color: #555;">
     Page
-    <select style="font-size: 12px; padding: 1px 4px; border: 1px solid #adadad;">
-        <option>1</option>
-    </select>
+    <select style="font-size: 12px; padding: 1px 4px; border: 1px solid #adadad;"><option>1</option></select>
     <span class="pagination-nav">
         <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#171;</a>
         <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#8249;</a>
@@ -60,5 +64,3 @@
         <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#187;</a>
     </span>
 </div>
-
-{% endblock %}

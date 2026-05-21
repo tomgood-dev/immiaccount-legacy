@@ -1,0 +1,125 @@
+@page
+@model ImmiAccount.Pages.Applications.IndexModel
+@{
+    ViewData["Title"] = "My applications summary";
+}
+
+<div class="section-header">
+    <h2>My applications summary</h2>
+    <span class="help-icon" title="Help">?</span>
+</div>
+
+<div class="content-area">
+
+    <div class="action-row">
+        <a href="/Applications/New" class="action-link">
+            <span class="icon">&#128196;</span>
+            New application
+        </a>
+        <a href="#" class="action-link">
+            <span class="icon">&#128229;</span>
+            Import application
+        </a>
+        <a href="#" class="action-link">
+            <span class="icon">&#9993;</span>
+            Submit applications
+        </a>
+    </div>
+
+    <div class="search-row">
+        <input type="text" class="search-input" placeholder="" />
+        <button class="search-btn" type="button">&#128269;</button>
+        <a href="#" class="advanced-search-link">&#9658; Advanced search</a>
+    </div>
+
+    <div class="list-header-row">
+        <span class="list-title">List of applications</span>
+        <div class="sort-row">
+            Sort by
+            <select class="sort-select">
+                <option>Last updated</option>
+                <option>Date lodged</option>
+                <option>Status</option>
+            </select>
+            <span>&#8597;</span>
+            &nbsp;
+            <a href="/Applications" class="refresh-link">&#8635; Refresh</a>
+        </div>
+    </div>
+
+    <div class="pagination-row">
+        1 &ndash; @Model.Applications.Count of @Model.Applications.Count results
+        &nbsp;&nbsp;
+        Page
+        <select class="page-select"><option>1</option></select>
+        <span class="pagination-nav">
+            <a href="#">&#171;</a>
+            <a href="#">&#8249;</a>
+            <a href="#">&#8250;</a>
+            <a href="#">&#187;</a>
+        </span>
+    </div>
+
+    <div class="orange-rule"></div>
+
+    @for (int i = 0; i < Model.Applications.Count; i++)
+    {
+        var app = Model.Applications[i];
+        var isFirst = i == 0;
+        <div class="app-card">
+            <div class="app-card-header @(isFirst ? "" : "collapsed")">
+                <button class="expand-btn" type="button">@(isFirst ? "-" : "+")</button>
+                <div class="app-card-header-info">
+                    <a href="/Applications/@app.Id" class="applicant-name">
+                        @app.DisplayName (@DateHelper.Format(app.DateOfBirth))
+                    </a>
+                    <span class="visa-stream">@app.SubclassName</span>
+                    <span class="app-status">@app.CurrentStatus</span>
+                </div>
+            </div>
+            @if (isFirst)
+            {
+                <div class="app-card-body">
+                    <div class="app-details-two-col">
+                        <div class="app-details-col">
+                            <div class="app-detail-item">
+                                <span class="lbl">Reference No</span>
+                                <span class="val">@app.ReferenceNumber</span>
+                            </div>
+                            <div class="app-detail-item">
+                                <span class="lbl">Type</span>
+                                <span class="val">@app.SubclassName</span>
+                            </div>
+                            <div class="app-detail-item">
+                                <span class="lbl">Estimated</span>
+                                <span class="val"><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-processing-times" target="_blank">Global processing times are published monthly</a></span>
+                            </div>
+                            <div class="app-detail-item">
+                                <span class="lbl">Processing Time</span>
+                                <span class="val">&nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="app-details-col">
+                            <div class="app-detail-item">
+                                <span class="lbl">Last updated</span>
+                                <span class="val">@DateHelper.Format(app.LastUpdated)</span>
+                            </div>
+                            <div class="app-detail-item">
+                                <span class="lbl">Date submitted</span>
+                                <span class="val">@DateHelper.Format(app.DateLodged)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-card-actions">
+                        <a href="/Applications/@app.Id" class="btn"><span>&#128193;</span> View details</a>
+                        <a href="#" class="btn">Copy</a>
+                        <a href="#" class="btn">Update details</a>
+                        <a href="#" class="btn">Remove</a>
+                        <a href="#" class="btn">Share &#8594;</a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
