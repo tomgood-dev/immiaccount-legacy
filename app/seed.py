@@ -14,7 +14,7 @@ def seed():
 
     # --- Users ---
     existing_user = cursor.execute(
-        "SELECT id FROM users WHERE username = ?", ("swilson",)
+        "SELECT id FROM users WHERE username = ?", ("jsmith",)
     ).fetchone()
 
     if not existing_user:
@@ -24,13 +24,13 @@ def seed():
                 date_of_birth, email, phone, agent_email)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
-                "swilson",
+                "jsmith",
                 "Password1",
-                "WILSON, Samuel Chimwemwe",
-                "WILSON",
-                "Samuel Chimwemwe",
-                "1995-07-03",
-                "samuel.wilson@email.com",
+                "SMITH, John",
+                "SMITH",
+                "John",
+                "1990-01-01",
+                "john.smith@email.com",
                 "+61 412 345 678",
                 "ANTHONY@VISACORP.COM.AU",
             ),
@@ -77,7 +77,7 @@ def seed():
 
     # --- Applications ---
     user = cursor.execute(
-        "SELECT id FROM users WHERE username = ?", ("swilson",)
+        "SELECT id FROM users WHERE username = ?", ("jsmith",)
     ).fetchone()
     user_id = user["id"]
 
