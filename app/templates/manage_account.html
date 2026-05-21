@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Account{% endblock %}
+
+{% block content %}
+
+<!-- Section header -->
+<div class="section-header">
+    <h2>Manage Account</h2>
+    <span class="help-icon" title="Help">?</span>
+</div>
+
+<div class="content-area">
+
+    {% if save_success %}
+    <div class="success-msg" style="margin-bottom: 14px;">
+        Your account details have been updated.
+    </div>
+    {% endif %}
+
+    {% if save_error %}
+    <div class="login-error" style="margin-bottom: 14px;">
+        {{ save_error }}
+    </div>
+    {% endif %}
+
+    <div class="subheading" style="margin-bottom: 14px;">Account Details</div>
+
+    <form method="POST" action="{{ url_for('manage_account') }}" class="manage-form">
+        <div class="form-group">
+            <label for="display_name">Display name</label>
+            <input type="text" id="display_name" name="display_name"
+                   value="{{ user.display_name or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email"
+                   value="{{ user.email or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone"
+                   value="{{ user.phone or '' }}">
+        </div>
+
+        <div style="margin-top: 6px; margin-bottom: 12px;">
+            <table style="font-size: 12px; color: #777;">
+                <tr>
+                    <td style="padding-right: 12px; font-weight: bold; color: #555;">Username</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Family name</td>
+                    <td>{{ user.family_name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Given names</td>
+                    <td>{{ user.given_names }}</td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Date of birth</td>
+                    <td>{{ user.date_of_birth | format_date }}</td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 12px; padding-top: 4px; font-weight: bold; color: #555;">Agent email</td>
+                    <td>{{ user.agent_email or 'Not set' }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="btn-row">
+            <button type="submit" class="btn" style="font-size: 13px; padding: 5px 16px;">Save</button>
+            &nbsp;
+            <a href="{{ url_for('applications') }}" class="btn" style="font-size: 13px; padding: 5px 16px;">Cancel</a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}New application{% endblock %}
+
+{% block content %}
+
+<!-- Section header -->
+<div class="section-header">
+    <h2>New application</h2>
+    <span class="help-icon" title="Help">?</span>
+</div>
+
+<div class="content-area">
+
+    <p style="font-size: 13px; color: #555; margin-bottom: 12px;">
+        Select the type of visa application you would like to lodge.
+    </p>
+
+    <ul class="new-app-list">
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">482 - Skills in Demand</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Air &amp; Sea Crew</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">APEC</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Citizenship</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Family</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Health</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Labour Agreement</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Family violence notification</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Refugee &amp; Humanitarian</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Resident Return</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Skilled</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Standard Business Sponsorship</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Status Resolution</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Student</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Temporary Work (Activity)</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Visa pre-application registration</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Visitor</a>
+        </li>
+        <li>
+            <span class="new-app-bullet">&#8857;</span>
+            <a href="#">Working Holiday Maker</a>
+        </li>
+    </ul>
+
+    <div style="margin-top: 16px;">
+        <a href="{{ url_for('applications') }}" class="btn" style="font-size: 13px;">Cancel</a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "app_base.html" %}
+
+{% block app_content %}
+
+<div class="app-info-section">
+    <h3>Application Details</h3>
+
+    <div class="app-info-grid">
+        <div class="app-info-row">
+            <span class="app-info-label">Reference Number</span>
+            <span class="app-info-value">{{ application.reference_number }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Visa Subclass</span>
+            <span class="app-info-value">{{ application.subclass_name }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Stream</span>
+            <span class="app-info-value">{{ application.stream }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Pathway Type</span>
+            <span class="app-info-value">{{ application.pathway_type }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Current Status</span>
+            <span class="app-info-value"><strong>{{ application.current_status }}</strong></span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Date Lodged</span>
+            <span class="app-info-value">{{ application.date_lodged | format_date }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Last Updated</span>
+            <span class="app-info-value">{{ application.last_updated | format_date }}</span>
+        </div>
+        {% if application.sponsor_name %}
+        <div class="app-info-row">
+            <span class="app-info-label">Sponsor</span>
+            <span class="app-info-value">{{ application.sponsor_name }}</span>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="app-info-section">
+    <h3>Applicant</h3>
+    <div class="app-info-grid">
+        <div class="app-info-row">
+            <span class="app-info-label">Name</span>
+            <span class="app-info-value">{{ application.given_names }} {{ application.family_name }}</span>
+        </div>
+        <div class="app-info-row">
+            <span class="app-info-label">Date of Birth</span>
+            <span class="app-info-value">{{ application.date_of_birth | format_date }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="processing-time-note">
+    <strong>Estimated processing time:</strong>
+    Global processing times are published monthly.
+    <a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-processing-times" target="_blank">View current processing times</a>.
+    <br><br>
+    Processing times are indicative only and may vary depending on individual circumstances.
+    You will be notified by email when a decision is made on your application.
+    Contact your migration agent if you have questions about the progress of your application.
+</div>
+
+{% endblock %}

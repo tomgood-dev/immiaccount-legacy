@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}My applications summary{% endblock %}
+
+{% block content %}
+
+<!-- Section header -->
+<div class="section-header">
+    <h2>My applications summary</h2>
+    <span class="help-icon" title="Help">?</span>
+</div>
+
+<div class="content-area">
+
+    <!-- Action row -->
+    <div class="action-row">
+        <a href="{{ url_for('new_application') }}" class="action-link">
+            <span class="icon">&#128196;</span>
+            New application
+        </a>
+        <a href="#" class="action-link">
+            <span class="icon">&#128229;</span>
+            Import application
+        </a>
+        <a href="#" class="action-link">
+            <span class="icon">&#9993;</span>
+            Submit applications
+        </a>
+    </div>
+
+    <!-- Search row -->
+    <div class="search-row">
+        <input type="text" class="search-input" placeholder="" />
+        <button class="search-btn" type="button">&#128269;</button>
+        <a href="#" class="advanced-search-link">&#9658; Advanced search</a>
+    </div>
+
+    <!-- List header & sort -->
+    <div class="list-header-row">
+        <span class="list-title">List of applications</span>
+        <div class="sort-row">
+            Sort by
+            <select class="sort-select">
+                <option>Last updated</option>
+                <option>Date lodged</option>
+                <option>Status</option>
+            </select>
+            <span>&#8597;</span>
+            &nbsp;
+            <a href="{{ url_for('applications') }}" class="refresh-link">&#8635; Refresh</a>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-row">
+        1 &ndash; {{ applications|length }} of {{ applications|length }} results
+        &nbsp;&nbsp;
+        Page
+        <select class="page-select">
+            <option>1</option>
+        </select>
+        <span class="pagination-nav">
+            <a href="#">&#171;</a>
+            <a href="#">&#8249;</a>
+            <a href="#">&#8250;</a>
+            <a href="#">&#187;</a>
+        </span>
+    </div>
+
+    <!-- Orange rule -->
+    <div class="orange-rule"></div>
+
+    <!-- Application cards -->
+    {% for app in applications %}
+    {% set is_first = loop.first %}
+
+    <div class="app-card">
+        <!-- Card header -->
+        <div class="app-card-header {% if not is_first %}collapsed{% endif %}">
+            <button class="expand-btn" type="button">{% if is_first %}-{% else %}+{% endif %}</button>
+            <div class="app-card-header-info">
+                <a href="{{ url_for('app_home', app_id=app.id) }}" class="applicant-name">
+                    {{ app.display_name }} ({{ app.date_of_birth | format_date }})
+                </a>
+                <span class="visa-stream">{{ app.subclass_name }}</span>
+                <span class="app-status">{{ app.current_status }}</span>
+            </div>
+        </div>
+
+        {% if is_first %}
+        <!-- Expanded card body -->
+        <div class="app-card-body">
+            <div class="app-details-two-col">
+                <div class="app-details-col">
+                    <div class="app-detail-item">
+                        <span class="lbl">Reference No</span>
+                        <span class="val">{{ app.reference_number }}</span>
+                    </div>
+                    <div class="app-detail-item">
+                        <span class="lbl">Type</span>
+                        <span class="val">{{ app.subclass_name }}</span>
+                    </div>
+                    <div class="app-detail-item">
+                        <span class="lbl">Estimated</span>
+                        <span class="val"><a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-processing-times" target="_blank">Global processing times are published monthly</a></span>
+                    </div>
+                    <div class="app-detail-item">
+                        <span class="lbl">Processing Time</span>
+                        <span class="val">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="app-details-col">
+                    <div class="app-detail-item">
+                        <span class="lbl">Last updated</span>
+                        <span class="val">{{ app.last_updated | format_date }}</span>
+                    </div>
+                    <div class="app-detail-item">
+                        <span class="lbl">Date submitted</span>
+                        <span class="val">{{ app.date_lodged | format_date }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="app-card-actions">
+                <a href="{{ url_for('app_home', app_id=app.id) }}" class="btn">
+                    <span>&#128193;</span> View details
+                </a>
+                <a href="#" class="btn">Copy</a>
+                <a href="#" class="btn">Update details</a>
+                <a href="#" class="btn">Remove</a>
+                <a href="#" class="btn">Share &#8594;</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

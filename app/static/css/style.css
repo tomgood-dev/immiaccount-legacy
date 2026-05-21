@@ -1,0 +1,1059 @@
+/* ============================================================
+   ImmiAccount Legacy — style.css
+   Faithful recreation of 2012-era Java EE portal aesthetics
+   ============================================================ */
+
+/* --- Reset & Base --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #333;
+    background: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #1a5276;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Header --- */
+.site-header {
+    background: #1d3557;
+    min-height: 68px;
+    padding: 0;
+}
+
+.header-inner {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    min-height: 68px;
+}
+
+.header-left {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 8px 16px;
+    width: 340px;
+}
+
+.header-right {
+    display: table-cell;
+    vertical-align: top;
+    padding: 4px 16px 4px 0;
+    text-align: right;
+}
+
+.gov-branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gov-crest svg {
+    display: block;
+}
+
+.gov-text {
+    color: #fff;
+}
+
+.gov-text .gov-name {
+    font-size: 11px;
+    font-weight: bold;
+    display: block;
+    line-height: 1.3;
+}
+
+.gov-text .dept-name {
+    font-size: 10px;
+    display: block;
+    color: #ccd6e0;
+    line-height: 1.3;
+}
+
+.header-user-row {
+    font-size: 12px;
+    color: #fff;
+    padding-top: 6px;
+    padding-bottom: 2px;
+}
+
+.header-user-row span {
+    color: #fff;
+    margin-right: 4px;
+}
+
+.header-user-row a {
+    color: #fff;
+    margin: 0 6px;
+    font-size: 12px;
+}
+
+.header-user-row a:hover {
+    text-decoration: underline;
+}
+
+.gov-title {
+    color: #fff;
+    font-size: 34px;
+    font-weight: bold;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    display: block;
+}
+
+/* --- Navigation Bar --- */
+.site-nav {
+    background: #f0f0f0;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.nav-inner {
+    display: flex;
+    align-items: stretch;
+    padding: 0 16px;
+    height: 36px;
+}
+
+.nav-tab {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    font-size: 13px;
+    color: #1a5276;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    height: 36px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.nav-tab:hover {
+    background: #e8e8e8;
+    text-decoration: none;
+    border-bottom-color: #c0c0c0;
+}
+
+.nav-tab.active {
+    border-bottom: 3px solid #e07720;
+    font-weight: bold;
+    color: #1a5276;
+}
+
+/* --- Section Header Bar --- */
+.section-header {
+    background: #1d3557;
+    color: #fff;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+.section-header h2 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+
+.section-header .help-icon {
+    color: #fff;
+    font-size: 13px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1;
+    padding: 0;
+}
+
+.content-area {
+    padding: 16px;
+    background: #fff;
+    min-height: 400px;
+}
+
+/* --- Dashboard Action Row --- */
+.action-row {
+    display: flex;
+    gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 12px;
+}
+
+.action-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #1a5276;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+.action-link .icon {
+    font-size: 18px;
+    color: #e07720;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Search Bar --- */
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.search-input {
+    border: 1px solid #adadad;
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 220px;
+    height: 28px;
+}
+
+.search-btn {
+    background: linear-gradient(to bottom, #f5f5f5, #ddd);
+    border: 1px solid #adadad;
+    padding: 3px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    height: 28px;
+}
+
+.search-btn:hover {
+    background: linear-gradient(to bottom, #eee, #ccc);
+}
+
+.advanced-search-link {
+    font-size: 12px;
+    color: #1a5276;
+}
+
+/* --- Application List --- */
+.list-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.list-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a5276;
+}
+
+.sort-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #555;
+}
+
+.sort-select {
+    font-size: 12px;
+    padding: 2px 4px;
+    border: 1px solid #adadad;
+    background: #fff;
+}
+
+.refresh-link {
+    font-size: 12px;
+    color: #1a5276;
+}
+
+.pagination-row {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.pagination-row .page-select {
+    font-size: 12px;
+    padding: 1px 4px;
+    border: 1px solid #adadad;
+}
+
+.pagination-nav a,
+.pagination-nav span {
+    font-size: 12px;
+    color: #1a5276;
+    margin: 0 2px;
+}
+
+/* Orange rule above application list */
+.orange-rule {
+    border-top: 2px solid #e07720;
+    margin-bottom: 8px;
+}
+
+/* --- Application Card --- */
+.app-card {
+    border: 1px solid #d0d0d0;
+    margin-bottom: 8px;
+    background: #fff;
+}
+
+.app-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    background: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.app-card-header.collapsed {
+    border-bottom: none;
+    background: #fafafa;
+}
+
+.expand-btn {
+    font-family: monospace;
+    font-size: 12px;
+    color: #1a5276;
+    border: 1px solid #adadad;
+    background: linear-gradient(to bottom, #f5f5f5, #ddd);
+    padding: 1px 5px;
+    cursor: pointer;
+    min-width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.app-card-header-info {
+    flex: 1;
+}
+
+.app-card-header-info .applicant-name {
+    font-size: 14px;
+    color: #1a5276;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.app-card-header-info .applicant-name:hover {
+    text-decoration: underline;
+}
+
+.app-card-header-info .visa-stream {
+    font-size: 13px;
+    color: #333;
+    display: block;
+    margin-top: 1px;
+}
+
+.app-card-header-info .app-status {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-top: 1px;
+}
+
+/* Expanded card body */
+.app-card-body {
+    padding: 10px 12px 10px 36px;
+}
+
+.app-details-grid {
+    display: table;
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.app-details-row {
+    display: table-row;
+}
+
+.app-detail-label {
+    display: table-cell;
+    font-weight: bold;
+    color: #555;
+    padding: 2px 12px 2px 0;
+    width: 180px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.app-detail-value {
+    display: table-cell;
+    color: #333;
+    padding: 2px 0;
+    vertical-align: top;
+}
+
+.app-detail-value a {
+    color: #1a5276;
+    font-size: 12px;
+}
+
+.app-detail-value.double-col {
+    padding-right: 16px;
+}
+
+.app-details-two-col {
+    display: flex;
+    gap: 0;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.app-details-col {
+    flex: 1;
+}
+
+.app-detail-item {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.app-detail-item .lbl {
+    font-weight: bold;
+    color: #555;
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.app-detail-item .val {
+    color: #333;
+    flex: 1;
+}
+
+/* Application card action buttons */
+.app-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(to bottom, #f5f5f5, #ddd);
+    border: 1px solid #adadad;
+    color: #333;
+    font-size: 12px;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: linear-gradient(to bottom, #eee, #ccc);
+    text-decoration: none;
+    color: #333;
+}
+
+.btn-primary {
+    background: linear-gradient(to bottom, #5b9bd5, #3a7dc8);
+    border: 1px solid #2a6099;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to bottom, #4a8cc4, #2a6ab8);
+    color: #fff;
+}
+
+.btn-orange {
+    background: linear-gradient(to bottom, #f0a060, #e07720);
+    border: 1px solid #c06010;
+    color: #fff;
+}
+
+.btn-icon {
+    font-size: 14px;
+}
+
+/* --- New Application Page --- */
+.new-app-list {
+    list-style: none;
+    padding: 12px 0;
+}
+
+.new-app-list li {
+    padding: 6px 0;
+    border-bottom: 1px dotted #ddd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.new-app-list li:last-child {
+    border-bottom: none;
+}
+
+.new-app-bullet {
+    color: #e07720;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.new-app-list a {
+    font-weight: bold;
+    color: #1a5276;
+    font-size: 13px;
+}
+
+/* --- Application Detail Sidebar Layout --- */
+.app-detail-wrapper {
+    display: flex;
+    min-height: 500px;
+}
+
+.app-sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: #f5f5f5;
+    border-right: 1px solid #d0d0d0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.sidebar-section-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px 4px 12px;
+    border-bottom: 1px solid #ddd;
+    background: #ece8e0;
+}
+
+.sidebar-menu-item {
+    display: block;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #1a5276;
+    text-decoration: none;
+    border-bottom: 1px solid #e8e8e4;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu-item:hover {
+    background: #eee;
+    text-decoration: none;
+    border-left-color: #c0c0c0;
+}
+
+.sidebar-menu-item.active {
+    border-left: 3px solid #e07720;
+    background: #ece8e0;
+    font-weight: bold;
+}
+
+.app-main-content {
+    flex: 1;
+    background: #fff;
+    padding: 16px;
+    overflow: auto;
+}
+
+/* App detail top bar */
+.app-top-bar {
+    background: #1d3557;
+    color: #fff;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.app-top-bar-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.app-top-bar-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.app-top-bar-icons a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+/* --- Messages Tab --- */
+.messages-heading {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.messages-info-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.messages-info-box strong {
+    color: #1a5276;
+}
+
+.correspondence-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.correspondence-table th {
+    background: #555;
+    color: #fff;
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.correspondence-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: top;
+}
+
+.correspondence-table tr:hover td {
+    background: #f5f5f5;
+}
+
+.corr-title-link {
+    color: #1a5276;
+}
+
+/* --- Documents Tab --- */
+.documents-section {
+    margin-bottom: 20px;
+}
+
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.documents-table th {
+    background: #555;
+    color: #fff;
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 12px;
+}
+
+.documents-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.upload-form {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 14px;
+    max-width: 500px;
+}
+
+.upload-form h4 {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.form-row label {
+    font-size: 13px;
+    color: #555;
+    min-width: 140px;
+}
+
+.form-select {
+    font-size: 13px;
+    padding: 3px 6px;
+    border: 1px solid #adadad;
+    background: #fff;
+}
+
+.form-file-input {
+    font-size: 13px;
+}
+
+.success-msg {
+    background: #dff0d8;
+    border: 1px solid #3c763d;
+    color: #3c763d;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+/* --- Payments Page --- */
+.payments-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.transaction-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.transaction-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.period-select {
+    font-size: 12px;
+    padding: 2px 4px;
+    border: 1px solid #adadad;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.filter-row label {
+    color: #555;
+}
+
+.filter-input {
+    border: 1px solid #adadad;
+    padding: 3px 6px;
+    font-size: 13px;
+    width: 180px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.data-table th {
+    background: #555;
+    color: #fff;
+    padding: 6px 8px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.data-table th .sort-arrows {
+    font-size: 10px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #e8e8e8;
+    color: #555;
+}
+
+.no-data-row td {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+.table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+    padding: 4px 0;
+}
+
+.table-pagination {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.table-pagination a,
+.table-pagination span {
+    font-size: 12px;
+    color: #1a5276;
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+/* --- App Home Tab --- */
+.app-info-section {
+    margin-bottom: 16px;
+}
+
+.app-info-section h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a5276;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.app-info-grid {
+    display: table;
+    font-size: 13px;
+    width: 100%;
+}
+
+.app-info-row {
+    display: table-row;
+}
+
+.app-info-label {
+    display: table-cell;
+    font-weight: bold;
+    color: #555;
+    padding: 4px 16px 4px 0;
+    width: 220px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.app-info-value {
+    display: table-cell;
+    color: #333;
+    padding: 4px 0;
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+.processing-time-note {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #5a4000;
+    margin-top: 12px;
+    line-height: 1.5;
+}
+
+/* --- Manage Account --- */
+.manage-form {
+    max-width: 480px;
+}
+
+.manage-form .form-group {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.manage-form label {
+    font-size: 13px;
+    color: #555;
+    min-width: 140px;
+    text-align: right;
+}
+
+.manage-form input[type="text"],
+.manage-form input[type="email"],
+.manage-form input[type="tel"] {
+    border: 1px solid #adadad;
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 260px;
+}
+
+.manage-form .btn-row {
+    margin-left: 150px;
+    margin-top: 8px;
+}
+
+/* --- Login Page --- */
+.login-page {
+    min-height: 100vh;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.login-box {
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.login-box .section-header {
+    margin-bottom: 0;
+}
+
+.login-form-inner {
+    padding: 20px 24px;
+}
+
+.login-form-inner .form-group {
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-form-inner label {
+    font-size: 13px;
+    color: #555;
+    min-width: 100px;
+    text-align: right;
+}
+
+.login-form-inner input[type="text"],
+.login-form-inner input[type="password"] {
+    border: 1px solid #adadad;
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 220px;
+}
+
+.login-btn-row {
+    margin-left: 110px;
+    margin-top: 16px;
+}
+
+.login-error {
+    background: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.login-timeout {
+    background: #fcf8e3;
+    border: 1px solid #faebcc;
+    color: #8a6d3b;
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.login-help-text {
+    font-size: 12px;
+    color: #777;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* --- Footer --- */
+.site-footer {
+    background: #e0e0e0;
+    border-top: 1px solid #c8c8c8;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+}
+
+.site-footer a {
+    color: #555;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- Utility --- */
+.divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 12px 0;
+}
+
+.subheading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a5276;
+    margin-bottom: 10px;
+}

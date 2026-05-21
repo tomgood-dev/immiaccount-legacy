@@ -1,0 +1,64 @@
+{% extends "app_base.html" %}
+
+{% block app_content %}
+
+<div class="messages-heading">
+    Messages
+    <span class="help-icon" title="Help" style="border: 1px solid #aaa; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #555; cursor: pointer;">?</span>
+</div>
+
+<div class="messages-info-box">
+    Correspondence for this application is currently being sent to a Registered Migration Agent /
+    Legal Practitioner at the following email address:
+    <strong>{{ user.agent_email }}</strong>
+    <br><br>
+    Please check your spam filter if you have not received any correspondence.
+    <br><br>
+    To change who correspondence is sent to, complete the &#8216;Change of migration agent, legal
+    practitioner or authorised recipient&#8217; form in the
+    <a href="#">Update details</a> page.
+</div>
+
+<div class="subheading">List of correspondence</div>
+
+<table class="correspondence-table">
+    <thead>
+        <tr>
+            <th>Correspondence title &#9660;</th>
+            <th>Date sent &#9660;</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if correspondence %}
+            {% for corr in correspondence %}
+            <tr>
+                <td><a href="#" class="corr-title-link">{{ corr.title }}</a></td>
+                <td>{{ corr.date_sent | format_date }}</td>
+                <td>{{ corr.recipient_email }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3" style="text-align: center; color: #999; padding: 20px;">
+                    No correspondence available.
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<div style="margin-top: 8px; display: flex; align-items: center; justify-content: flex-end; font-size: 12px; gap: 4px; color: #555;">
+    Page
+    <select style="font-size: 12px; padding: 1px 4px; border: 1px solid #adadad;">
+        <option>1</option>
+    </select>
+    <span class="pagination-nav">
+        <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#171;</a>
+        <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#8249;</a>
+        <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#8250;</a>
+        <a href="#" style="color: #1a5276; margin: 0 2px; font-size: 12px;">&#187;</a>
+    </span>
+</div>
+
+{% endblock %}
